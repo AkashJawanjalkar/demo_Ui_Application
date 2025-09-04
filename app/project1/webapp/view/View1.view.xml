@@ -1,0 +1,66 @@
+<mvc:View
+    controllerName="project1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+>
+    <App class="view1Root pageSoftBG">
+        <Page showNavButton="false" backgroundDesign="Solid">
+            
+
+            <content>
+                <VBox width="100%" alignItems="Center" class="sapUiContentPadding">
+                    <VBox width="auto" class="professionalCard accentCard sapUiLargePadding sapUiContentPadding sapUiMediumMargin centerContainerWidth" backgroundDesign="Solid" justifyContent="Start">
+
+                        <l:Grid defaultSpan="XL12 L12 M12 S12" width="100%">
+                            <l:content>
+                                <Label text="Packing Site Code" labelFor="siteInput"/>
+                                <Input id="siteInput" placeholder="Enter site code" showValueHelp="true" valueHelpRequest=".onValueHelpRequest" width="100%"/>
+                            </l:content>
+                        </l:Grid>
+
+                        <HBox justifyContent="End" class="sapUiSmallMarginTop">
+                            <Button text="Submit" type="Emphasized" icon="sap-icon://accept" press=".onSubmitPress" class="primaryActionButton"/>
+                        </HBox>
+                    </VBox>
+
+                    <Dialog id="siteDialog" title="Select Packing Site" stretchOnPhone="true" contentHeight="50%" contentWidth="40%">
+                        <Table id="siteTable" mode="SingleSelectLeft" inset="false" class="sapUiResponsiveMargin zebraTable" width="100%">
+                            <columns>
+                                <Column><Text text="Packing Site ID"/></Column>
+                                <Column><Text text="Packing Site Name"/></Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="SITE01"/>
+                                        <Text text="Site One"/>
+                                    </cells>
+                                </ColumnListItem>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="SITE02"/>
+                                        <Text text="Site Two"/>
+                                    </cells>
+                                </ColumnListItem>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="SITE03"/>
+                                        <Text text="Site Three"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        <beginButton>
+                            <Button text="OK" type="Emphasized" press=".onDialogOk"/>
+                        </beginButton>
+                        <endButton>
+                            <Button text="Cancel" type="Transparent" press=".onDialogCancel"/>
+                        </endButton>
+                    </Dialog>
+                </VBox>
+            </content>
+        </Page>
+    </App>
+</mvc:View>

@@ -1,0 +1,140 @@
+/* ===============================
+   Styles for View1
+   Root class: view1Root
+=============================== */
+
+/* Professional card container */
+.view1Root .professionalCard {
+    border-radius: 0.5rem;
+    background-color: var(--sapGroup_ContentBackground);
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--sapList_BorderColor);
+}
+
+/* Centered container constraints */
+.view1Root .centerContainerWidth {
+    max-width: 700px;
+    width: 100%;
+}
+
+/* Header styling alignment */
+.view1Root .pageHeaderTitle {
+    font-weight: 600;
+}
+
+/* Subtle page background gradient */
+.view1Root .pageSoftBG .sapMPageBgSolid {
+    background: linear-gradient(180deg, var(--sapBackgroundColor) 0%, var(--sapList_Background) 100%);
+}
+
+/* Accent header bar */
+.view1Root .accentBar {
+    background: linear-gradient(90deg, var(--sapBrandColor) 0%, var(--sapHighlightColor) 100%);
+}
+.view1Root .accentBar .sapMTitle,
+.view1Root .accentBar .sapMLabel,
+.view1Root .accentBar .sapMBarLeft,
+.view1Root .accentBar .sapMBarRight {
+    color: var(--sapContent_ContrastTextColor);
+}
+
+/* Accent left border on cards */
+.view1Root .accentCard {
+    border-left: 4px solid var(--sapBrandColor);
+}
+
+/* Zebra-like table rows (sap.m.Table) */
+.view1Root .zebraTable .sapMListTblRow:nth-child(even) td {
+    background-color: color-mix(in srgb, var(--sapList_Background) 92%, var(--sapContent_ForegroundBorderColor));
+}
+
+/* Card hover feedback */
+.view1Root .professionalCard:hover {
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.12);
+    border-color: var(--sapList_SelectionBorderColor);
+}
+
+/* Primary buttons */
+.view1Root .primaryActionButton {
+    border-radius: 0.375rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.view1Root .primaryActionButton.sapMBtnEmphasized {
+    background-color: var(--sapButton_Emphasized_Background);
+    border-color: var(--sapButton_Emphasized_BorderColor);
+}
+.view1Root .primaryActionButton.sapMBtn:hover {
+    filter: brightness(0.98);
+}
+
+/* ===============================
+   Styles for View2
+   Root class: view2Root
+=============================== */
+
+/* Professional card container */
+.view2Root .professionalCard {
+    border-radius: 0.5rem;
+    background-color: var(--sapGroup_ContentBackground);
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--sapTile_BorderColor);
+}
+
+/* Centered container constraints */
+.view2Root .centerContainerWidth {
+    max-width: 700px;
+    width: 100%;
+}
+
+/* Wider container for data-heavy panels */
+.view2Root .wideContainerWidth {
+    max-width: 1100px;
+    width: 100%;
+}
+
+/* Panel header polish */
+.view2Root .panelPolish .sapMPanelHdr,
+.view2Root .panelPolish .sapMPanelWrappingDivTb {
+    border-bottom: 1px solid var(--sapList_BorderColor);
+}
+
+/* Header styling alignment */
+.view2Root .pageHeaderTitle {
+    font-weight: 600;
+}
+
+/* Page background tweak */
+.view2Root .pageSoftBG .sapMPageBgSolid {
+    background: linear-gradient(180deg, var(--sapBackgroundColor) 0%, var(--sapList_Background) 100%);
+}
+
+/* Primary buttons */
+.view2Root .primaryActionButton {
+    border-radius: 0.375rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.view2Root .primaryActionButton.sapMBtnEmphasized {
+    background-color: var(--sapButton_Emphasized_Background);
+    border-color: var(--sapButton_Emphasized_BorderColor);
+}
+.view2Root .primaryActionButton.sapMBtn:hover {
+    filter: brightness(0.98);
+}
+
+/* Secondary buttons */
+.view2Root .secondaryActionButton {
+    border-radius: 0.375rem;
+    padding-left: 0.875rem;
+    padding-right: 0.875rem;
+}
+.view2Root .secondaryActionButton.sapMBtn:hover {
+    filter: brightness(0.98);
+}
+
+/* Card hover feedback */
+.view2Root .professionalCard:hover {
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.12);
+    border-color: var(--sapList_SelectionBorderColor);
+}

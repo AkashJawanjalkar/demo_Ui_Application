@@ -1,0 +1,158 @@
+<mvc:View
+    controllerName="project1.controller.View2"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:table="sap.ui.table"
+    xmlns:f="sap.m"
+    class="viewPadding"
+>
+    <f:Page title="" showNavButton="false"  class="view2Root pageSoftBG">
+        <f:customHeader>
+            <f:Bar>
+                <f:contentLeft>
+                    <f:Title text="" class="pageHeaderTitle" />
+                </f:contentLeft>
+            </f:Bar>
+        </f:customHeader>
+
+        <content>
+            <VBox class="sapUiSmallMargin" width="100%" renderType="Bare" alignItems="Center">
+                <items>
+                    <!-- Upload Actions Panel -->
+                    <Panel headerText="Upload Actions" class="sapUiMediumMarginBottom panelPolish professionalCard centerContainerWidth wideContainerWidth">
+                        <VBox class="sapUiSmallMargin">
+                            <HBox alignItems="Center" justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
+                                <!-- Left aligned buttons -->
+                                <HBox>
+                                    <Button text="Download Sample"
+                                            icon="sap-icon://download"
+                                            type="Emphasized"
+                                            class="sapUiTinyMarginEnd"
+                                            press=".onDownloadSample" />
+                                </HBox>
+
+                                <!-- Right aligned -->
+                                <HBox alignItems="Center">
+                                    <!-- FileUploader -->
+                                    <u:FileUploader id="fileUploader"
+                                                    name="uploadFile"
+                                                    tooltip="Upload your XLSX file"
+                                                    fileType="xlsx"
+                                                    placeholder="Choose Excel file"
+                                                    sameFilenameAllowed="false"
+                                                    uploadOnChange="false"
+                                                    change=".onFileChange"
+                                                    style="Emphasized"
+                                                    class="sapUiTinyMarginEnd" />
+                                    <!-- Upload button -->
+                                    <Button text="Upload File"
+                                            icon="sap-icon://upload"
+                                            type="Emphasized"
+                                            press=".onUploadPress"
+                                            class="sapUiTinyMarginEnd primaryActionButton" />
+                                </HBox>
+                            </HBox>
+                        </VBox>
+                    </Panel>
+
+                    <!-- Uploaded Data Panel -->
+                    <!-- Section title -->
+                    <Title text="Uploaded Data" level="H2" class="sapUiSmallMarginBottom" />    
+                    <Panel  headerText="Uploaded Data Preview" width="100%" class="professionalCard panelPolish centerContainerWidth wideContainerWidth">
+                        <headerToolbar>
+                            <Toolbar design="Transparent">
+                                <ToolbarSpacer />
+                                <Button text="Download File"
+                                        icon="sap-icon://download"
+                                        type="Transparent"
+                                        visible="{viewModel>/isFileUploaded}"
+                                        press=".onDownloadUploadedData"
+                                        class="sapUiTinyMarginEnd sapUiTinyMarginTop" />
+                            </Toolbar>
+                        </headerToolbar>
+
+                        <!-- Table -->
+                        <table:Table id="previewTable"
+                                     visible="false"
+                                     rows="{preview>/data}"
+                                     selectionMode="None"
+                                     enableColumnReordering="true"
+                                     enableCellFilter="true"
+                                     showColumnVisibilityMenu="true"
+                                     rowHeight="35"
+                                     visibleRowCountMode="Auto">
+                            <table:columns>
+                                <table:Column filterProperty="BatchNo" sortProperty="BatchNo">
+                                    <Label text="BatchNo" />
+                                    <table:template>
+                                        <Text text="{preview>BatchNo}" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column filterProperty="ComponentCode" sortProperty="ComponentCode">
+                                    <Label text="ComponentCode" />
+                                    <table:template>
+                                        <Text text="{preview>ComponentCode}" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column filterProperty="PackingSite" sortProperty="PackingSite">
+                                    <Label text="PackingSiteID" />
+                                    <table:template>
+                                        <Text text="{preview>PackingSite}" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column filterProperty="PackingDate" sortProperty="PackingDate">
+                                    <Label text="PackingDate" />
+                                    <table:template>
+                                        <Text text="{preview>PackingDate}" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column filterProperty="ReleaseDate" sortProperty="ReleaseDate">
+                                    <Label text="ReleaseDate" />
+                                    <table:template>
+                                        <Text text="{preview>ReleaseDate}" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column filterProperty="Comments" sortProperty="Comments" width="12em">
+                                    <Label text="Comments" />
+                                    <table:template>
+                                        <Text text="{preview>Comments}" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column  width="25em">
+                                    <Label text="Error" />
+                                    <table:template>
+                                        <Text text="{preview>Error}" wrapping="true" />
+                                    </table:template>
+                                </table:Column>
+                            </table:columns>
+                        </table:Table>
+                    </Panel>
+                </items>
+            </VBox>
+        </content>
+
+        <!-- Footer -->
+        <f:footer>
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button
+                    text="Reset"
+                    icon="sap-icon://reset"
+                    type="Transparent"
+                    press=".onReset"
+                    class="secondaryActionButton"/>
+                <Button
+                    text="Submit"
+                    type="Accept"
+                    icon="sap-icon://action"
+                    press=".onSubmitData"
+                    enabled="false"
+                    id="submitBtn"
+                    class="primaryActionButton"/>
+            </Toolbar>
+        </f:footer>
+
+    </f:Page>
+</mvc:View>
