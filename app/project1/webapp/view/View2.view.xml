@@ -8,7 +8,7 @@
     xmlns:f="sap.m"
     class="viewPadding"
 >
-    <f:Page title="" showNavButton="false"  class="view2Root pageSoftBG">
+    <f:Page title="" showNavButton="false" class="view2Root pageSoftBG">
         <f:customHeader>
             <f:Bar>
                 <f:contentLeft>
@@ -20,8 +20,10 @@
         <content>
             <VBox class="sapUiSmallMargin" width="100%" renderType="Bare" alignItems="Center">
                 <items>
+
                     <!-- Upload Actions Panel -->
-                    <Panel headerText="Upload Actions" class="sapUiMediumMarginBottom panelPolish professionalCard centerContainerWidth wideContainerWidth">
+                    <Panel headerText="Upload Actions"
+                           class="sapUiMediumMarginBottom panelPolish professionalCard centerContainerWidth wideContainerWidth">
                         <VBox class="sapUiSmallMargin">
                             <HBox alignItems="Center" justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
                                 <!-- Left aligned buttons -->
@@ -58,9 +60,15 @@
                     </Panel>
 
                     <!-- Uploaded Data Panel -->
-                    <!-- Section title -->
-                    <Title text="Uploaded Data" level="H2" class="sapUiSmallMarginBottom" />    
-                    <Panel  headerText="Uploaded Data Preview" width="100%" class="professionalCard panelPolish centerContainerWidth wideContainerWidth">
+                    <Panel headerText="Uploaded Data Preview"
+                           width="100%"
+                           class="professionalCard panelPolish centerContainerWidth wideContainerWidth"
+                           expandable="false"
+                           expanded="true"
+                           > 
+
+                        <Title text="Uploaded Data" level="H2" class="sapUiSmallMarginBottom" />
+
                         <headerToolbar>
                             <Toolbar design="Transparent">
                                 <ToolbarSpacer />
@@ -80,47 +88,59 @@
                                      selectionMode="None"
                                      enableColumnReordering="true"
                                      enableCellFilter="true"
-                                     showColumnVisibilityMenu="true"
-                                     rowHeight="35"
-                                     visibleRowCountMode="Auto">
+                                     rowHeight="15"
+                                     visibleRowCount="10"
+                                     visibleRowCountMode="Fixed"> <!-- 👈 Fixed rows instead of deprecated prop -->
                             <table:columns>
-                                <table:Column filterProperty="BatchNo" sortProperty="BatchNo">
-                                    <Label text="BatchNo" />
+                                <table:Column width="6rem" hAlign="Center">
+                                    <Label text="Edit" />
+                                    <table:template>
+                                        <Button icon="sap-icon://edit" type="Transparent" press=".onEditRowPress" tooltip="Edit row"/>
+                                    </table:template>
+                                </table:Column>
+                                <table:Column filterProperty="BatchNo" sortProperty="BatchNo" width="8em">
+                                    <Label text="Batch No" />
                                     <table:template>
                                         <Text text="{preview>BatchNo}" />
                                     </table:template>
                                 </table:Column>
-                                <table:Column filterProperty="ComponentCode" sortProperty="ComponentCode">
-                                    <Label text="ComponentCode" />
+
+                                <table:Column filterProperty="ComponentCode" sortProperty="ComponentCode" width="8em">
+                                    <Label text="Component Code" />
                                     <table:template>
                                         <Text text="{preview>ComponentCode}" />
                                     </table:template>
                                 </table:Column>
-                                <table:Column filterProperty="PackingSite" sortProperty="PackingSite">
-                                    <Label text="PackingSiteID" />
+
+                                <table:Column filterProperty="PackingSite" sortProperty="PackingSite" width="8em">
+                                    <Label text="PackingSite ID" />
                                     <table:template>
                                         <Text text="{preview>PackingSite}" />
                                     </table:template>
                                 </table:Column>
-                                <table:Column filterProperty="PackingDate" sortProperty="PackingDate">
-                                    <Label text="PackingDate" />
+
+                                <table:Column filterProperty="PackingDate" sortProperty="PackingDate" width="8em">
+                                    <Label text="Packing Date" />
                                     <table:template>
                                         <Text text="{preview>PackingDate}" />
                                     </table:template>
                                 </table:Column>
-                                <table:Column filterProperty="ReleaseDate" sortProperty="ReleaseDate">
-                                    <Label text="ReleaseDate" />
+
+                                <table:Column filterProperty="ReleaseDate" sortProperty="ReleaseDate" width="8em">
+                                    <Label text="Release Date" />
                                     <table:template>
                                         <Text text="{preview>ReleaseDate}" />
                                     </table:template>
                                 </table:Column>
-                                <table:Column filterProperty="Comments" sortProperty="Comments" width="12em">
+
+                                <table:Column filterProperty="Comments" sortProperty="Comments" width="8em">
                                     <Label text="Comments" />
                                     <table:template>
                                         <Text text="{preview>Comments}" />
                                     </table:template>
                                 </table:Column>
-                                <table:Column  width="25em">
+
+                                <table:Column width="20em">
                                     <Label text="Error" />
                                     <table:template>
                                         <Text text="{preview>Error}" wrapping="true" />
@@ -133,26 +153,52 @@
             </VBox>
         </content>
 
+        <!-- Dependents: Row Edit Dialog -->
+        <f:dependents>
+            <Dialog id="editDialog" title="Edit Row" stretchOnPhone="true" contentWidth="25rem">
+                <VBox class="sapUiMediumMargin">
+                    <Label text="Batch No"/>
+                    <Input value="{edit>/BatchNo}" editable="true"/>
+
+                    <Label text="Component Code" class="sapUiSmallMarginTop"/>
+                    <Input value="{edit>/ComponentCode}" editable="true"/>
+
+                    <Label text="PackingSite" class="sapUiSmallMarginTop"/>
+                    <Input value="{edit>/PackingSite}" editable="true"/>
+
+                    <Label text="Packing Date (DD/MM/YYYY)" class="sapUiSmallMarginTop"/>
+                    <DatePicker value="{edit>/PackingDate}" displayFormat="dd/MM/yyyy" valueFormat="dd/MM/yyyy" placeholder="DD/MM/YYYY"/>
+
+                    <Label text="Release Date (DD/MM/YYYY)" class="sapUiSmallMarginTop"/>
+                    <DatePicker value="{edit>/ReleaseDate}" displayFormat="dd/MM/yyyy" valueFormat="dd/MM/yyyy" placeholder="DD/MM/YYYY"/>
+                </VBox>
+                <beginButton>
+                    <Button text="Save" type="Emphasized" press=".onEditSave"/>
+                </beginButton>
+                <endButton>
+                    <Button text="Cancel" type="Transparent" press=".onEditCancel"/>
+                </endButton>
+            </Dialog>
+        </f:dependents>
+
         <!-- Footer -->
         <f:footer>
             <Toolbar>
                 <ToolbarSpacer/>
-                <Button
-                    text="Reset"
-                    icon="sap-icon://reset"
-                    type="Transparent"
-                    press=".onReset"
-                    class="secondaryActionButton"/>
-                <Button
-                    text="Submit"
-                    type="Accept"
-                    icon="sap-icon://action"
-                    press=".onSubmitData"
-                    enabled="false"
-                    id="submitBtn"
-                    class="primaryActionButton"/>
+                <Button text="Reset"
+                        icon="sap-icon://reset"
+                        type="Transparent"
+                        press=".onReset"
+                        class="secondaryActionButton"
+                        enabled="{viewModel>/isFileUploaded}"/>
+                <Button text="Submit"
+                        type="Accept"
+                        icon="sap-icon://action"
+                        press=".onSubmitData"
+                        enabled="{viewModel>/isFileUploaded}"
+                        id="submitBtn"
+                        class="primaryActionButton"/>
             </Toolbar>
         </f:footer>
-
     </f:Page>
 </mvc:View>

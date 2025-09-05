@@ -5,6 +5,22 @@ sap.ui.define([
     "use strict";
 
     return Controller.extend("project1.controller.View1", {
+        onInit: function () {
+            // Attach route matched event
+            this.getOwnerComponent().getRouter().getRoute("RouteView1")
+                .attachPatternMatched(this._onRouteMatched, this);
+        },
+
+        _onRouteMatched: function () {
+            // Reset input box
+            this.byId("siteInput").setValue("");
+
+            // Reset table selection (if needed)
+            var oTable = this.byId("siteTable");
+            if (oTable) {
+                oTable.removeSelections();
+            }
+        },
 
         // when user clicks F4 help
         onValueHelpRequest: function () {
@@ -34,10 +50,20 @@ sap.ui.define([
         onDialogCancel: function () {
             this.byId("siteDialog").close();
         },
-          onSubmitPress: function () {
-         this.getOwnerComponent().getRouter().navTo("RouteView2");
-          }
 
+        onSubmitPress: function () {
+            var oRouter = this.getOwnerComponent().getRouter();
+            var sPackingSite = this.byId("siteInput").getValue();
 
+    if (!sPackingSite) {
+        sap.m.MessageToast.show("Please select a Packing Site");
+        return;
+    }
+            this.getOwnerComponent().getRouter().navTo("RouteView2",{
+        query: {
+            site: sPackingSite
+        }
+    });
+        }
     });
 });
